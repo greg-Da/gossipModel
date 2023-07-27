@@ -1,24 +1,13 @@
-# README
+# Gossip
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This repository only contains Models and Migrations
 
-Things you may want to cover:
+To test it launch :
 
-* Ruby version
+`bundle install`
 
-* System dependencies
+`rails db:migrate`
 
-* Configuration
+`rails db:seed`
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+then you can access the elements of the database with `rails c`
