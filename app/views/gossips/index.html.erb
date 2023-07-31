@@ -1,0 +1,12 @@
+<h1>Bienvenue</h1>
+<% @gossips.each do |gossip|%>
+<div class="card mb-3" >
+  <div class="card-header">
+    <a style="font-weight: bolder" href="/gossip/<%= gossip.id %>>" class="card-title"><%= gossip.title%></a>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><small class="text-body-secondary"><%= gossip.user.first_name %> </small></p>
+  </div>
+</div>
+
+<% end %>

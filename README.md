@@ -1,13 +1,17 @@
 # Gossip
 
-This repository only contains Models and Migrations
+Display differents gossips
 
 To test it launch :
 
 `bundle install`
 
+`rails db:create`
+
 `rails db:migrate`
 
 `rails db:seed`
 
-then you can access the elements of the database with `rails c`
+`rails s`
+
+you can also access the elements of the database with `rails c`
