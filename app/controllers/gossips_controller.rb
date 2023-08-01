@@ -17,21 +17,34 @@ class GossipsController < ApplicationController
     @gossip = Gossip.new(title: params[:title], content: params[:content], user: User.first)
 
     if @gossip.save
-      redirect_to gossips_path, notice: "Potins créé"
+      flash[:success] = "Potins créé"
+      redirect_to gossips_path
     else
       render :new
     end
   end
 
   def edit
-
+    @gossip = Gossip.find(params[:id])
   end
 
   def update
+    @gossip = Gossip.find(params[:id])
+    @gossip.title = params[:title]
+    @gossip.content = params[:content]
 
+    if @gossip.save
+      flash[:success] = "Potins édité"
+      redirect_to gossips_path
+    else
+      render :edit
+    end
   end
 
   def destroy
-
+    @gossip = Gossip.find(params[:id])
+    @gossip.destroy
+    flash[:warning] = "Supression du potin"
+    redirect_to gossips_path
   end
 end

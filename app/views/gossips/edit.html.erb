@@ -1,0 +1,21 @@
+<% if @gossip.errors.any? %>
+    <% @gossip.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger" role="alert"><%= message %></div>
+    <% end %>
+<% end %>
+
+<h1 class="text-center my-4">Update ce potin !</h1>
+
+<%= form_tag url_for(action: 'update'), method: "put" do %>
+
+    <%= label_tag 'Titre' %>
+    <%= text_field_tag 'title', @gossip.title, class: 'form-control' %>
+    <br /> <br />
+
+    <%= label_tag 'Contenu' %>
+    <%= text_area_tag 'content', @gossip.content, class: 'form-control' %>
+    <br /> <br />
+
+    <%= submit_tag "Update le potin" , class: 'btn btn-primary'%>
+
+<% end %>

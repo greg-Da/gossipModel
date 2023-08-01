@@ -4,3 +4,8 @@
 
 <p>Créé le : <%= @gossip.created_at %></p>
 <a href="/user/<%= @gossip.user.id %>">Par : <%= @gossip.user.first_name %> <%= @gossip.user.last_name %></a>
+<br>
+
+<a class="btn btn-primary my-3" href="/gossips/<%= @gossip.user.id %>/edit">Editer le potin</a>
+
+<%= button_to 'Remove', gossip_path(@gossip.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?'}%> 

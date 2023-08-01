@@ -1,20 +1,25 @@
-<% if flash[:notice] != nil %>
-  <div class="alert alert-success" role="alert">
-    L'opération <%=flash[:alert]%> a été un succès
-  </div>
+<% if flash != nil %>
+  <% flash.each do |type, message| %>
+    <div class="alert alert-<%= type %>" role="alert">
+      <%=message%> 
+    </div>
+  <% end %>
 <% end %>
 
 <h1 class="text-center my-4">Bienvenue</h1>
 
-<a href="<%= new_gossip_path %>">Créer un nouveau potin</a>
+<div class="d-flex justify-content-center mb-3">
+  <a class="btn btn-primary" href="<%= new_gossip_path %>">Créer un nouveau potin</a>
+</div>
 
 <div class="d-flex flex-wrap justify-content-center">
+
 <% @gossips.each do |gossip|%>
   <div class="card mb-3 " style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title"><%= gossip.title%></h5>
       <p class="card-text"><%= gossip.user.first_name %> <%= gossip.user.last_name %></p>
-      <a href="/gossip/<%= gossip.id %>" class="btn btn-primary">Check it out</a>
+      <a href="/gossips/<%= gossip.id %>" class="btn btn-primary">Check it out</a>
     </div>
   </div>
 
