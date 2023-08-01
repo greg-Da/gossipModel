@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   root "gossips#index"
   
-  get "/gossip/:id", to: "gossips#show"
+  resources :gossips
 
   get "/user/:id", to: "users#show"
 
