@@ -13,9 +13,11 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  get "/user/:id", to: "users#show"
+  resources :users
 
-  get "/city/:id", to: "cities#show"
+  resources :sessions, only: [:create, :new, :destroy]
+
+  resources :cities, only: [:show]
 
   get "/team", to: "static_pages#team"
   get "/contact", to: "static_pages#contact"

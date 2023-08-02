@@ -29,7 +29,8 @@ User.destroy_all
         description: Faker::Lorem.sentence(word_count: 20),
         email: Faker::Internet.email,
         age: rand(18..99),
-        city: City.order('RANDOM()').first
+        city: City.order('RANDOM()').first,
+        password_digest: Faker::Lorem.word
     )
 end
 

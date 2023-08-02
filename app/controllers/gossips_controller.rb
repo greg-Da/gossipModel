@@ -1,4 +1,5 @@
 class GossipsController < ApplicationController
+  before_action :is_logged_in?, except: [:index, :show]
   
   def index
     @gossips = Gossip.all
@@ -12,11 +13,10 @@ class GossipsController < ApplicationController
 
   def new
     @gossip = Gossip.new()
-
   end
 
   def create
-    @gossip = Gossip.new(title: params[:title], content: params[:content], user: User.first)
+    @gossip = Gossip.new(title: params[:title], content: params[:content], user: User.find_by(id: session[:user_id]))
 
     if @gossip.save
       flash[:success] = "Potins créé"
@@ -47,6 +47,7 @@ class GossipsController < ApplicationController
     @gossip = Gossip.find(params[:id])
     @gossip.destroy
     flash[:warning] = "Supression du potin"
-    redirect_to gossips_path
+    redirect_to root_path
   end
+
 end

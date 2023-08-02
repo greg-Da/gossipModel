@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :is_logged_in?, except: [:index, :show]
 
   # GET /comments or /comments.json
   def index
@@ -21,7 +22,7 @@ class CommentsController < ApplicationController
 
   # POST /comments or /comments.json
   def create
-    @comment = Comment.new(content: params[:content], gossip_id: params[:gossip_id],user: User.first)
+    @comment = Comment.new(content: params[:content], gossip_id: params[:gossip_id], user: User.find_by(id: session[:user_id]))
 
     if @comment.save
       flash[:success] = "Commentaire créé"
