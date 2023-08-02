@@ -1,0 +1,16 @@
+<h1 class="text-center"><%= @city.name %></h1>
+
+<p class="my-3 text-center">Tout les potins de cette ville :</p>
+<div class="d-flex flex-wrap justify-content-center">
+    <% @city.users.each do |user| %>
+        <% user.gossips.each do |gossip| %>
+            <div class="card mb-3 " style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title"><%=gossip.title%></h5>
+                <p class="card-text"><%=user.first_name %> <%=user.last_name %></p>
+                <a href="/gossips/<%=gossip.id %>" class="btn btn-primary">Check it out</a>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+</div>

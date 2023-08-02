@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments
   get 'users/show'
   get 'gossip/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -8,9 +9,13 @@ Rails.application.routes.draw do
 
   root "gossips#index"
   
-  resources :gossips
+  resources :gossips do
+    resources :comments
+  end
 
   get "/user/:id", to: "users#show"
+
+  get "/city/:id", to: "cities#show"
 
   get "/team", to: "static_pages#team"
   get "/contact", to: "static_pages#contact"

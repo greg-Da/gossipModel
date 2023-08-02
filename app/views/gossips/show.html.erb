@@ -5,7 +5,40 @@
 <p>Créé le : <%= @gossip.created_at %></p>
 <a href="/user/<%= @gossip.user.id %>">Par : <%= @gossip.user.first_name %> <%= @gossip.user.last_name %></a>
 <br>
+<a href="/city/<%= @gossip.user.city.id %>">Dans la ville : <%= @gossip.user.city.name %></a>
+<br>
 
-<a class="btn btn-primary my-3" href="/gossips/<%= @gossip.user.id %>/edit">Editer le potin</a>
+<div class="d-flex my-3">
+    <a class="btn btn-primary" href="/gossips/<%= @gossip.id %>/edit">Editer le potin</a>
+    <%= button_to 'Supprimer', gossip_path(@gossip.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?'}%>
+</div>
 
-<%= button_to 'Remove', gossip_path(@gossip.id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?'}%> 
+<hr>
+
+<p>Créer un commentaire :</p>
+<%= form_tag("/gossips/#{@gossip.id}/comments", method: "post") do %>
+
+    <%= text_area_tag 'content', @comment.content, class: 'form-control' %>
+
+    <%= submit_tag "Valider" , class: 'btn btn-primary my-3'%>
+
+<% end %>
+
+<div class="col-10 p-3 border rounded m-auto">
+    <p>Commentaires :</p>
+
+    <% @comments.each do |comment| %>
+        <div class="">
+            <blockquote class="bg-secondary-subtle ">
+                <%= comment.content %>
+                <footer> - <%= comment.user.first_name %> <%= comment.user.last_name %></footer>
+                <div class="d-flex">
+                    <a class="btn btn-primary btn-sm" href="/gossips/<%= @gossip.id %>/comments/<%= comment.id %>/edit">Editer le commentaire</a>
+                    <%= button_to 'Supprimer', gossip_comment_path(@gossip.id, comment.id), method: :delete, class: 'btn btn-danger btn-sm', data: { confirm: 'Are you sure?'}%>
+                </div>
+            </blockquote>   
+        <div>
+
+    <% end %>
+
+</div>

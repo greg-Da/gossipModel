@@ -6,6 +6,8 @@ class GossipsController < ApplicationController
 
   def show
     @gossip = Gossip.find(params[:id])
+    @comments = @gossip.comments
+    @comment = Comment.new
   end
 
   def new
@@ -35,7 +37,7 @@ class GossipsController < ApplicationController
 
     if @gossip.save
       flash[:success] = "Potins édité"
-      redirect_to gossips_path
+      redirect_to gossip_path(@gossip.id)
     else
       render :edit
     end

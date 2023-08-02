@@ -1,0 +1,15 @@
+<h1 class="text-center my-4">Update ce commentaire !</h1>
+
+<div class="m-auto col-8">
+
+  <%= form_tag url_for(action: 'update'), method: "put" do %>
+
+      <%= label_tag 'Contenu' %>
+      <%= text_area_tag 'content', @comment.content, class: 'form-control' %>
+
+      <div class="d-flex justify-content-center my-3">
+        <%= submit_tag "Update" , class: 'btn btn-primary btn-lg'%>
+      </div>
+
+  <% end %>
+</div>

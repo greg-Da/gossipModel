@@ -1,7 +1,7 @@
 <h1><%= @user.first_name %> <%= @user.last_name %></h1>
 <p> <span style="font-weight: bold">Age : </span> <%= @user.age %></p>
 <p> <span style="font-weight: bold">Email : </span> <%= @user.email %></p>
-<p> <span style="font-weight: bold">City : </span> <%= @user.city.name %></p>
+<a href="/city/<%= @user.city.id %>"> <span style="font-weight: bold">City : </span> <%= @user.city.name %></a>
 <p> <span style="font-weight: bold">Description : </span> <%= @user.description %></p>
 <p> <span style="font-weight: bold">User since </span> : <%= @user.created_at %></p>
 
