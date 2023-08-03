@@ -18,6 +18,10 @@ class CommentsController < ApplicationController
   # GET /comments/1/edit
   def edit
     @comment = Comment.find(params[:id])
+    if @comment.user != current_user
+      flash[:warning] = "Tu n'en es pas l'auteur"
+      redirect_back_or_to root_path
+    end
   end
 
   # POST /comments or /comments.json
@@ -36,23 +40,37 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1 or /comments/1.json
   def update
     @comment = Comment.find(params[:id])
-    @comment.content = params[:content]
+    if @comment.user == current_user
 
-    if @comment.save
-      flash[:success] = "Commentaire édité"
-      redirect_to gossip_path(@comment.gossip.id)
+      @comment.content = params[:content]
+
+      if @comment.save
+        flash[:success] = "Commentaire édité"
+        redirect_to gossip_path(@comment.gossip.id)
+      else
+        flash[:warning] = "Commentaire non édité"
+        redirect_to gossip_path(@comment.gossip.id)
+      end
     else
-      flash[:warning] = "Commentaire non édité"
-      redirect_to gossip_path(@comment.gossip.id)
+      flash[:warning] = "Tu n'en es pas l'auteur"
+      redirect_back_or_to root_path
     end
   end
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
     @comment = Comment.find(params[:id])
+
+    if @comment.user == current_user
+
     @comment.destroy
     flash[:warning] = "Supression du commentaire"
     redirect_to gossip_path(@comment.gossip.id)
+
+    else
+      flash[:warning] = "Tu n'en es pas l'auteur"
+      redirect_back_or_to root_path
+    end
   end
 
 end

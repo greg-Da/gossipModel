@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
 
+    include SessionsHelper
+
     private
 
     def is_logged_in?

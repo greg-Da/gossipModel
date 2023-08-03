@@ -8,6 +8,15 @@
                 <div class="card-body">
                 <h5 class="card-title"><%=gossip.title%></h5>
                 <p class="card-text"><%=user.first_name %> <%=user.last_name %></p>
+                <% if session[:user_id] != nil %>
+                    <% if gossip.likes.where(user_id: current_user.id) == [] %>
+                        <%= button_to 'Like', gossip_likes_path(gossip.id), method: :post, class: 'btn btn-primary', data: { confirm: 'Are you sure?'}%>
+                    <% else %>
+                        <%= button_to 'Liked', gossip_like_path(gossip.id, Like.find_by(user_id: current_user.id).id), method: :delete, class: 'btn btn-success', data: { confirm: 'Are you sure?'}%>
+                    <% end %>
+                <% end %>
+
+                <p class="card-text"><%= gossip.likes.count %> likes</p>
                 <a href="/gossips/<%=gossip.id %>" class="btn btn-primary">Check it out</a>
                 </div>
             </div>

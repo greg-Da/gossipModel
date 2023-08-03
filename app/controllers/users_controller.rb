@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     )
     
     if @user.save
-      session[:user_id] = @user.id
+      log_in(@user)
       flash[:success] = "User créé"
       redirect_to gossips_path
     else
