@@ -9,25 +9,33 @@ class UsersController < ApplicationController
   end
   
   def create
-    @cities = City.all
-
-    @user = User.new(
-      first_name: params[:first_name],
-      last_name: params[:last_name], 
-      password: params[:password], 
-      email: params[:email],
-      description: params[:description],
-      age: params[:age],
-      city: City.find(params[:city])
-    )
     
-    if @user.save
-      log_in(@user)
-      flash[:success] = "User créé"
-      redirect_to gossips_path
+    if params[:password] == params[:password_confirmation]
+      
+      @cities = City.all
+      
+      @user = User.new(
+        first_name: params[:first_name],
+        last_name: params[:last_name], 
+        password: params[:password], 
+        email: params[:email],
+        description: params[:description],
+        age: params[:age],
+        city: City.find(params[:city])
+      )
+      
+      if @user.save
+        log_in(@user)
+        flash[:success] = "User créé"
+        redirect_to gossips_path
+      else
+        render :new
+      end
     else
-      render :new
+      flash[:warning] = "Mot de passe différend de la confirmation"
+      redirect_back_or_to root_path
     end
+    
   end
-  
 end
+  
