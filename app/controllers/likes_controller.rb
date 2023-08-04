@@ -3,10 +3,6 @@ class LikesController < ApplicationController
     
     def create
         like = Like.new
-
-        # puts "*"*60
-        # puts params
-        
         if params[:gossip_id]
             if is_liked?("gossip", params[:gossip_id])
                 flash[:warning] = "Tu ne peux pas liker plusieur fois le même potin"

@@ -40,6 +40,10 @@
     <%= password_field_tag 'password_confirmation', @user.password_confirmation, class: 'form-control' %>
     <br /> <br />
 
+    <%= label_tag 'Remember me' %>
+    <%= check_box_tag 'remember', true, true %>
+    <br /> <br />
+
 
     <%= submit_tag "Valider l'inscription ", class: 'btn btn-primary'%>
 

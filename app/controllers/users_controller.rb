@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   end
   
   def create
+    puts params
     
     if params[:password] == params[:password_confirmation]
       
@@ -26,6 +27,12 @@ class UsersController < ApplicationController
       
       if @user.save
         log_in(@user)
+
+        if params[:remember]  == true
+          remember(user)
+        end
+
+
         flash[:success] = "User créé"
         redirect_to gossips_path
       else
@@ -33,9 +40,9 @@ class UsersController < ApplicationController
       end
     else
       flash[:warning] = "Mot de passe différend de la confirmation"
-      redirect_back_or_to root_path
+      ender :new
     end
     
   end
-end
   
+end
